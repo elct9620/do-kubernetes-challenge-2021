@@ -5,10 +5,10 @@ This repository is created for DigitalOcean Kubernetes Challenge 2021.
 
 ## Roadmap
 
-* [ ] Build a demo Ruby on Rails API Server
+* [x] Build a demo Ruby on Rails API Server
 * [x] Create a Kubernetes Cluster in DigitalOcean
 * [x] Create a scalable database on Kubernetes
-* [ ] Import example data to demo application
+* [x] Import example data to demo application
 
 ## Detail
 
