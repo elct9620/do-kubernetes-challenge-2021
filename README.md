@@ -75,3 +75,52 @@ Create database use `createdb` command in local machine
 ```bash
 kubectl port-forward -n cinema service/cinema-db 5678:5432
 ```
+
+### Setup Cert-Manager for Let's Encrypt
+
+Install Cert-Manager via Helm
+
+```bash
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.6.1 \
+  --set installCRDs=true
+```
+
+Configure issuer
+
+```yaml
+kubectl apply -f issuer.yml
+```
+
+> The email is masked, changed it before run the command
+
+### Setup Application
+
+Deploy application
+
+```bash
+kubectl apply -f deployments/cinema.yml
+```
+
+Create service
+
+```bash
+kubectl apply -f services/cinema.yml
+```
+
+Configure Ingress
+
+```bash
+kubectl apply -f ingress/cinema.yml
+```
+
+### Test API
+
+```bash
+curl https://kube-challenge.aotoki.dev/
+```

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cinema-api-ingress
+  namespace: cinema
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+  - host: "kube-challenge.aotoki.dev"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: cinema-api-service
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - kube-challenge.aotoki.dev
+    secretName: cinema-api-cert

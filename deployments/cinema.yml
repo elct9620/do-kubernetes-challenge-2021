@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cinema-api
+  namespace: cinema
+  labels:
+    app: cinema-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cinema-api
+  template:
+    metadata:
+      labels:
+        app: cinema-api
+    spec:
+      containers:
+      - name: api
+        image: elct9620/do-kubernetes-challenge-2021:0.1.0
+        ports:
+        - containerPort: 3000
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: cinema-secret
+                key: DATABASE_URL
+          - name: AUTO_MIGRATION
+            value: 'yes'
