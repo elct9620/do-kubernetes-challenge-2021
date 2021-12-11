@@ -14,6 +14,8 @@ This repository is created for DigitalOcean Kubernetes Challenge 2021.
 
 This is [Viewshow](https://www.vscinemas.com.tw/vsweb/) crawler as an API service for demo.
 
+Demo URL: https://kube-challenge.aotoki.dev/
+
 ### Create Namespace
 
 ```bash

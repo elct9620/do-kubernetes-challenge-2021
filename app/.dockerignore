@@ -1,0 +1,35 @@
+# Repo
+.git/
+
+# Ctags
+tags
+
+# Docker
+Dockerfile
+docker-compose*.yml
+
+# CI/CD
+.github/
+.cache/
+coverage/
+spec/
+features/
+.licensed.yml
+.gitlab-ci.yml
+.travis.yml
+.overcommit.yml
+.rubocop*.yml
+rspec.xml
+
+# Application
+.bundle/
+vendor/
+!vendor/line
+log/*
+tmp/*
+config/database.yml
+.env
+.env*
+
+# Licensed
+.licenses
