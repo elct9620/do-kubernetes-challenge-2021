@@ -7,7 +7,7 @@ This repository is created for DigitalOcean Kubernetes Challenge 2021.
 
 * [ ] Build a demo Ruby on Rails API Server
 * [x] Create a Kubernetes Cluster in DigitalOcean
-* [ ] Create a scalable database on Kubernetes
+* [x] Create a scalable database on Kubernetes
 * [ ] Import example data to demo application
 
 ## Detail
@@ -41,4 +41,37 @@ stringData:
 
 ```bash
 kubectl apply secrets/postgres.yml
+```
+
+Add `DATABASE_URL` as secret for application
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cinema-secret
+  namespace: cinema
+type: Opaque
+stringData:
+  DATABASE_URL: postgres://postgres:[PASSWORD]@cinema-db.cinema.svc.cluster.local/cinema
+```
+
+### Setup Kubegres
+
+Install Kubegres
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/reactive-tech/kubegres/v1.14/kubegres.yaml
+```
+
+Crreate Database in `cinema` namespace
+
+```bash
+kubectl apply -f databases/cinama.yml
+```
+
+Create database use `createdb` command in local machine
+
+```bash
+kubectl port-forward -n cinema service/cinema-db 5678:5432
 ```

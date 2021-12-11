@@ -1,0 +1,22 @@
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: cinema-db
+  namespace: cinema
+spec:
+   replicas: 3
+   image: postgres:14.1
+   database:
+      size: 1Gi
+   env:
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+           secretKeyRef:
+              name: cinema-database-secret
+              key: superUserPassword
+
+      - name: POSTGRES_REPLICATION_PASSWORD
+        valueFrom:
+           secretKeyRef:
+              name: cinema-database-secret
+              key: replicationUserPassword
