@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cinema-refresh
+  namespace: cinema
+spec:
+  schedule: "@daily"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cinema
+            image: elct9620/do-kubernetes-challenge-2021:0.3.0
+            imagePullPolicy: IfNotPresent
+            command:
+              - openbox
+              - rake
+              - 'movie:refresh'
+            env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: cinema-secret
+                  key: DATABASE_URL
+          restartPolicy: OnFailure

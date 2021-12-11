@@ -121,6 +121,18 @@ Configure Ingress
 kubectl apply -f ingress/cinema.yml
 ```
 
+Add CronJob to refresh movies
+
+```bash
+kubectl apply -f jobs/cinema.yml
+```
+
+Trigger CronJob to initialize data
+
+```bash
+kubectl create job -n cinema --from=cronjob/cinema-refresh cinrma-movies-init
+```
+
 ### Test API
 
 ```bash
